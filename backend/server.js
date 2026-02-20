@@ -10,43 +10,44 @@ dotenv.config();
 const app = express();
 const server = http.createServer(app);
 
-const allowedOrigins = [
-  "http://localhost:3000",
-  "https://expert-booking-system.vercel.app"
-];
-
-const io = new Server(server, {
-  cors: {
-    origin: allowedOrigins,
-    methods: ["GET", "POST", "PATCH", "PUT", "DELETE"],
-    credentials: true
-  }
-});
-
+// ✅ Allow all origins safely (needed for Render + Vercel + Socket.io polling)
 app.use(cors({
-  origin: allowedOrigins,
+  origin: "*",
   methods: ["GET", "POST", "PATCH", "PUT", "DELETE"],
-  credentials: true
 }));
 
 app.use(express.json());
 
+// ✅ Socket.io with proper CORS
+const io = new Server(server, {
+  cors: {
+    origin: "*",
+    methods: ["GET", "POST", "PATCH", "PUT", "DELETE"],
+  }
+});
+
+// attach io to every request
 app.use((req, res, next) => {
   req.io = io;
   next();
 });
 
+// MongoDB connection
 mongoose.connect(process.env.MONGO_URI)
-.then(() => console.log("MongoDB Connected"))
-.catch(err => console.log(err));
+  .then(() => console.log("MongoDB Connected"))
+  .catch(err => console.log(err));
 
+// routes
 app.use("/experts", require("./routes/expertRoutes"));
 app.use("/bookings", require("./routes/bookingRoutes"));
 
+// socket connection
 io.on("connection", (socket) => {
   console.log("Client connected:", socket.id);
 });
 
-server.listen(process.env.PORT || 5000, () =>
-  console.log("Server running on port 5000")
-);
+// start server
+const PORT = process.env.PORT || 5000;
+server.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
