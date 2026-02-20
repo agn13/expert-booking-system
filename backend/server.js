@@ -10,19 +10,29 @@ dotenv.config();
 const app = express();
 const server = http.createServer(app);
 
+const allowedOrigins = [
+  "http://localhost:3000",
+  "https://expert-booking-system.vercel.app"
+];
+
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:3000"
+    origin: allowedOrigins,
+    methods: ["GET", "POST", "PATCH", "PUT", "DELETE"],
+    credentials: true
   }
 });
 
 app.use(cors({
-  origin: "http://localhost:3000"
+  origin: allowedOrigins,
+  methods: ["GET", "POST", "PATCH", "PUT", "DELETE"],
+  credentials: true
 }));
+
+app.options("*", cors());
 
 app.use(express.json());
 
-// Attach io to request
 app.use((req, res, next) => {
   req.io = io;
   next();
