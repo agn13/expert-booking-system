@@ -1,0 +1,117 @@
+/* Global */
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #f4f6f8;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 900px;
+  margin: auto;
+  padding: 20px;
+}
+
+/* Card */
+
+.card {
+  background: white;
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 15px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+/* Buttons */
+
+.btn {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin: 5px;
+  font-size: 14px;
+}
+
+.btn-primary {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #45a049;
+}
+
+.btn-secondary {
+  background-color: #2196F3;
+  color: white;
+}
+
+.btn-secondary:hover {
+  background-color: #1976D2;
+}
+
+.btn-disabled {
+  background-color: #ccc;
+  color: #666;
+  cursor: not-allowed;
+}
+
+/* Inputs */
+
+input, textarea, select {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+/* Slot buttons */
+
+.slot {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.slot.booked {
+  background-color: #ccc;
+  color: #666;
+}
+
+/* Status */
+
+.status {
+  padding: 4px 10px;
+  border-radius: 5px;
+  color: white;
+  font-size: 12px;
+}
+
+.status.Pending {
+  background-color: orange;
+}
+
+.status.Confirmed {
+  background-color: green;
+}
+
+.status.Completed {
+  background-color: blue;
+}
+
+/* Header */
+
+.header {
+  background-color: #2196F3;
+  color: white;
+  padding: 15px;
+  text-align: center;
+  font-size: 22px;
+}
+
+.page {
+  padding: 20px;
+}
