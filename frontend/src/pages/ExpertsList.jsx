@@ -37,10 +37,10 @@ const fetchExperts = useCallback(async () => {
 
 }, [search, category, page]);
 
-  useEffect(() => {
-    fetchExperts();
-  }, [search, category, page]);
 
+useEffect(() => {
+  fetchExperts();
+}, [fetchExperts]);
 
   if (loading)
     return (
